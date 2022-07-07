@@ -92,25 +92,29 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        //public async Task<GenericResponse<PessoaEntity>>GetById(int id)
-        //{
-        //    try
-        //    {
-        //        PessoaEntity entity = await _personService.GetByIdAsync(id);
-        //        return new GenericResponse<PessoaEntity>(entity).CreatedWithSucess();
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        return new GenericResponse<PessoaEntity>().Error(HttpStatusCode.InternalServerError, e.Message);
-        //    }
-        //}
-
         public async Task<PessoaEntity> GetById(int id)
         {
             try
             {
                 PessoaEntity entity = await _personService.GetByIdAsync(id);
                 return entity;
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        [Route("listCpf")]
+        public async Task<List<string>> GetCpfListAsync(PersonQuery personQuery)
+        {
+            try
+            {
+                
+                List<string> cpfs = await _personService.GetCpfListAsync(personQuery.Limit);
+                return cpfs;
 
             }
             catch (Exception e)

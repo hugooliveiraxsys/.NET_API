@@ -23,14 +23,24 @@ namespace Repositories
             _connection = connection;
         }
 
+        //Criar um metodo que retorna um usuario a partir da lista de cpfs
+
+        public new async Task<List<string>> GetCpfListAsync(int Limit)
+        {
+            StringBuilder query = new StringBuilder();  
+            query.Append($"SELECT TOP {Limit} CPF FROM TB_PESSOA");
+
+            IEnumerable<string> cpfs = await _connection.QueryAsync<string>(query.ToString());
+            return cpfs.ToList();
+        }
+
         public async Task<IEnumerable<PessoaEntity>> ListAsync(PersonQuery personQuery)
         {
             StringBuilder query = new StringBuilder();
-            query.Append($"SELECT TOP {personQuery.Limit} * FROM TB_PESSOA");
+            query.Append($"SELECT TOP {personQuery.Limit} FROM TB_PESSOA");
 
             IEnumerable<PessoaEntity> pessoaEntities = await _connection.QueryAsync<PessoaEntity>(query.ToString());
             return pessoaEntities;
-
         }
 
         public async Task<IEnumerable<ComboItem>>ComboItemAsync()

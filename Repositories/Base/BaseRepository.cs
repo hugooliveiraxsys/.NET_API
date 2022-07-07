@@ -38,6 +38,11 @@ namespace Repositories.Base
             return await _connection.GetAsync<Entity>(id);
         }
 
+        public Task<List<string>> GetCpfListAsync(int Limit)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Entity>> ListAsync(PersonQuery personQuery)
         {
             throw new NotImplementedException();
@@ -75,5 +80,7 @@ namespace Repositories.Base
             }
              _connection.BulkInsert(insertList);
         }
+
+        
     }
 }

@@ -18,6 +18,8 @@ namespace Services.Base.Interfaces
         public Task BulkInsert(List<Request> requests);
 
         public Task<PessoaEntity>GetByIdAsync(int id);
+         
+        public Task<List<string>> GetCpfListAsync(int Limit);
 
         public Task<IEnumerable<PessoaEntity>> ListAsync(PersonQuery personQuery);
 

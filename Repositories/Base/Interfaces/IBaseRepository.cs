@@ -8,8 +8,6 @@ namespace Repositories.Base.Interfaces
 {
     public interface IBaseRepository<Entity>
     {
-        //public Task<int?>InsertAsync(Entity entity);
-
         public Task<int?>InsertAsync(Entity entity);
 
         public Task<int?> BulkInsertManualAsync(List<Entity> entities);
@@ -19,6 +17,8 @@ namespace Repositories.Base.Interfaces
         public Task<int?>UpdateAsync(Entity entity);
 
         public Task<Entity>GetByIdAsync(int id);
+
+        public Task<List<string>> GetCpfListAsync(int Limit);
 
         public Task<IEnumerable<Entity>>ListAsync(PersonQuery personQuery);
 

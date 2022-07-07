@@ -3,7 +3,6 @@ using Models.Entities;
 using Models.Mappers.Interfaces;
 using Models.Requests;
 using Repositories.Interfaces;
-using Services.Base.Interfaces;
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace Services
 
         public async Task<int?>CreateAsync(PersonRequest request)
         {
-            
+
             if (request.Name.Length > 50)
             {
                 throw new Exception("Campo nome não pode ser maior que 50 caracteres");
@@ -70,6 +69,11 @@ namespace Services
             PessoaEntity entity = new PessoaEntity();
             entity = _personMapper.ToEntity(request);
             return (int)await _pessoaRepository.UpdateAsync(entity);
+        }
+
+        public async Task<List<string>> GetCpfListAsync(int limit)
+        {
+            return await _pessoaRepository.GetCpfListAsync(limit);
         }
 
         public async Task<PessoaEntity>GetByIdAsync(int id)
