@@ -76,6 +76,11 @@ namespace Services
             return await _pessoaRepository.GetCpfListAsync(limit);
         }
 
+        public async Task<PessoaEntity> GetByCpfAsync(string cpf)
+        {
+            return await _pessoaRepository.GetByCpfAsync(cpf);
+        }
+
         public async Task<PessoaEntity>GetByIdAsync(int id)
         {
             return await _pessoaRepository.GetByIdAsync(id);

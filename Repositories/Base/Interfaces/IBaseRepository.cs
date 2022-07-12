@@ -18,6 +18,8 @@ namespace Repositories.Base.Interfaces
 
         public Task<Entity>GetByIdAsync(int id);
 
+        public Task<Entity> GetByCpfAsync(string cpf);
+
         public Task<List<string>> GetCpfListAsync(int Limit);
 
         public Task<IEnumerable<Entity>>ListAsync(PersonQuery personQuery);

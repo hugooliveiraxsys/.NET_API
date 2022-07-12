@@ -27,11 +27,20 @@ namespace Repositories
 
         public new async Task<List<string>> GetCpfListAsync(int Limit)
         {
-            StringBuilder query = new StringBuilder();  
+            StringBuilder query = new StringBuilder();
             query.Append($"SELECT TOP {Limit} CPF FROM TB_PESSOA");
 
             IEnumerable<string> cpfs = await _connection.QueryAsync<string>(query.ToString());
             return cpfs.ToList();
+        }
+
+        public async Task<PessoaEntity> GetByCpfAsync(string cpf){
+
+            StringBuilder query = new StringBuilder();
+            query.Append($"SELECT * FROM TB_PESSOA WHERE CPF = '{cpf}'");
+
+            IEnumerable<PessoaEntity> pessoaEntity = await _connection.QueryAsync<PessoaEntity>(query.ToString());
+            return pessoaEntity.FirstOrDefault();
         }
 
         public async Task<IEnumerable<PessoaEntity>> ListAsync(PersonQuery personQuery)

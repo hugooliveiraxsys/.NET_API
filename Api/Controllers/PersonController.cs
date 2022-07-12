@@ -107,12 +107,28 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Route("by-cpf")]
+        public async Task<PessoaEntity> PersonByCpf([FromBody] PersonRequest personRequest)
+        {
+            try
+            {
+                PessoaEntity entity = await _personService
+                    .GetByCpfAsync(personRequest.Cpf);
+
+                return entity;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
         [Route("listCpf")]
         public async Task<List<string>> GetCpfListAsync(PersonQuery personQuery)
         {
             try
             {
-                
                 List<string> cpfs = await _personService.GetCpfListAsync(personQuery.Limit);
                 return cpfs;
 

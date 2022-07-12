@@ -38,6 +38,11 @@ namespace Repositories.Base
             return await _connection.GetAsync<Entity>(id);
         }
 
+        public Task<Entity> GetByCpfAsync(string cpf)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<string>> GetCpfListAsync(int Limit)
         {
             throw new NotImplementedException();
