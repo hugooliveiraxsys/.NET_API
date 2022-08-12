@@ -1,13 +1,11 @@
 ﻿using Dapper;
 using Models;
-using Models.Entities;
 using Models.Entities.Base;
 using Models.Requests;
 using Repositories.Base.Interfaces;
 using Repositories.Connections.Base;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Z.Dapper.Plus;
 
@@ -70,13 +68,6 @@ namespace Repositories.Base
 
         public async Task BulkInsertAsync(List<Entity> entities)
         {
-            
-            //for (int i = 0; i < entities.Count; i++) 
-            //{
-            //    entities[i].AsCreate();
-            //}
-            //_connection.BulkInsert(entities);
-
             List<Entity> insertList = new List<Entity>();
 
             foreach (Entity entity in entities)

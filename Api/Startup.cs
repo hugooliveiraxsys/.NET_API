@@ -40,10 +40,19 @@ namespace Api
                 new EstagTestConnection(Configuration.GetConnectionString("EstagTest"))
             );
 
+            #region Repositories
             services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddScoped<IPersonService, PersonService>();
+            #endregion
 
+            #region Mappers
             services.AddSingleton<IPersonMapper, PersonMapper>();
+            #endregion
+
+            #region [Cors]
+            services.AddCors();
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +65,15 @@ namespace Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
 
+            #region [Cors]
+            app.UseCors(c => {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+                
+            });
+            #endregion
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -66,6 +84,7 @@ namespace Api
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
